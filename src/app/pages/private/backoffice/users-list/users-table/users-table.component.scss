@@ -1,0 +1,14 @@
+.table-header {
+  display: flex;
+  justify-content: flex-end;
+  margin: 8px 0 12px;
+}
+
+.col-actions {
+  white-space: nowrap;
+  text-align: right;
+}
+
+table {
+  width: 100%;
+}

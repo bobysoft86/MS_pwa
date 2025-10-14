@@ -2,12 +2,18 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'home',
-    loadComponent: () => import('./home/home.page').then((m) => m.HomePage),
+    path: 'public',
+    loadChildren: () => import('./pages/public/public.routes').then((m) => m.publicRoutes),
   },
+
+  {
+    path: 'private',
+    loadChildren: () => import('./pages/private/private.routes').then((m) => m.privateRoutes),
+  },
+
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'public/login',
     pathMatch: 'full',
   },
 ];

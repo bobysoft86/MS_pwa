@@ -1,0 +1,20 @@
+
+<ion-content fullscreen>
+
+  <div class="users-list-container">
+    <div class="header-container">
+      <div class="title-container">
+        <h2>Gestión de usuarios</h2>
+      </div>
+      <div>
+        <ion-button class="btn-m" (click)="onCreate()">Crear nuevo usuario</ion-button>
+      </div>
+    </div>
+
+    <app-users-table
+    [users]="users"
+    (view)="onView($event)"
+    (remove)="onRemove($event)">
+  </app-users-table>
+</div>
+</ion-content>

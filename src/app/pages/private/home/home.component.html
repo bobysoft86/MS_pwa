@@ -1,0 +1,35 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-title>
+      Home
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon slot="icon-only"  name="person"></ion-icon>
+      </ion-button>
+@if (user?.role_id === 1) {
+  <ion-button (click)="goToBackoffice()">
+    <ion-icon slot="icon-only" name="home"></ion-icon>
+  </ion-button>
+}
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="home-container">
+
+    <div class="logo-container">
+      <img  src="assets/img/ms-logo.svg" alt="MS Logo" />
+    </div>
+    
+    <div>
+      <ion-button expand="block" class="btn-m">Reservar clase </ion-button> 
+      <ion-button expand="block" class="btn-m">Historico reservas </ion-button> 
+      <ion-button (click)="whatsContact()" expand="block" class="btn-m">Recargar bono </ion-button> 
+      <ion-button expand="block" class="btn-outline">Recargar bono </ion-button> 
+    </div>
+  </div>
+  
+
+</ion-content>

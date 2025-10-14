@@ -1,0 +1,15 @@
+
+
+.header-container {
+  h2 { margin: 0; }
+  .subtitle {
+    margin-top: 6px;
+    opacity: .8;
+    font-size: 0.95rem;
+  }
+}
+
+ion-item.ion-invalid {
+  --highlight-color-focused: var(--ion-color-danger);
+  --highlight-color-invalid: var(--ion-color-danger);
+}

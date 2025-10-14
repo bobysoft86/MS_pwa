@@ -1,0 +1,45 @@
+<ion-content class="ion-padding">
+  <div class="modal-header">
+    <h2 style="margin:0">Editar ejercicio</h2>
+    <p *ngIf="item?.exercise?.title" style="margin:6px 0 0; color: var(--ion-color-medium);">
+      {{ item.exercise.title }}
+    </p>
+  </div>
+
+  <form (ngSubmit)="save()" [formGroup]="form" style="margin-top:14px">
+    <ion-item [class.ion-invalid]="form.controls.weight.invalid && (form.controls.weight.dirty || form.controls.weight.touched)">
+      <ion-label position="floating">Peso (kg)</ion-label>
+      <ion-input
+        type="text"
+        formControlName="weight"
+        placeholder="Ej. 20">
+      </ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="form.controls.weight.hasError('min') && (form.controls.weight.dirty || form.controls.weight.touched)">
+      <small>El peso no puede ser negativo.</small>
+    </ion-text>
+
+    <ion-item class="ion-margin-top"
+      [class.ion-invalid]="form.controls.reps.invalid && (form.controls.reps.dirty || form.controls.reps.touched)">
+      <ion-label position="floating">Repeticiones</ion-label>
+      <ion-input
+        type="number"
+        inputmode="numeric"
+        formControlName="reps"
+        placeholder="Ej. 12">
+      </ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="form.controls.reps.hasError('min') && (form.controls.reps.dirty || form.controls.reps.touched)">
+      <small>Las repeticiones no pueden ser negativas.</small>
+    </ion-text>
+
+    <div class="ion-margin-top" style="display:flex; gap:8px;">
+      <ion-button class="btn-m" expand="block" color="medium" type="button" (click)="cancel()">
+        Cancelar
+      </ion-button>
+      <ion-button class="btn-m" expand="block" type="submit" [disabled]="form.invalid">
+        Guardar
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

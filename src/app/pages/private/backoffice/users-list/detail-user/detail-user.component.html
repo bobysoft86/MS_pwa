@@ -1,0 +1,99 @@
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="save()">
+    <ion-list *ngIf="user; else noUser">
+
+      <ion-item>
+        <ion-label>
+          <strong>ID:</strong>
+          <ion-text>{{ user.id }}</ion-text>
+        </ion-label>
+      </ion-item>
+
+      <!-- NOMBRE -->
+      <ng-container *ngIf="!editMode; else nameEdit">
+        <ion-item>
+          <ion-label>
+            <strong>Nombre:</strong>
+            <ion-text>{{ user.name }}</ion-text>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-template #nameEdit>
+        <ion-item [class.ion-invalid]="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input mode="ios" type="text" formControlName="name" required></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="form.controls.name.hasError('required') && (form.controls.name.dirty || form.controls.name.touched)">
+          <small>El nombre es obligatorio.</small>
+        </ion-text>
+        <ion-text color="danger" *ngIf="form.controls.name.hasError('minlength') && (form.controls.name.dirty || form.controls.name.touched)">
+          <small>Mínimo 2 caracteres.</small>
+        </ion-text>
+      </ng-template>
+
+      <!-- EMAIL -->
+      <ng-container *ngIf="!editMode; else emailEdit">
+        <ion-item>
+          <ion-label>
+            <strong>Email:</strong>
+            <ion-text>{{ user.email }}</ion-text>
+          </ion-label>
+        </ion-item>
+      </ng-container>
+      <ng-template #emailEdit>
+        <ion-item [class.ion-invalid]="form.controls.email.invalid && (form.controls.email.dirty || form.controls.email.touched)">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input mode="ios" type="email" formControlName="email" autocomplete="email" required></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="form.controls.email.hasError('required') && (form.controls.email.dirty || form.controls.email.touched)">
+          <small>El email es obligatorio.</small>
+        </ion-text>
+        <ion-text color="danger" *ngIf="form.controls.email.hasError('email') && (form.controls.email.dirty || form.controls.email.touched)">
+          <small>Formato de email no válido.</small>
+        </ion-text>
+      </ng-template>
+
+      <ion-item>
+        <ion-label>
+          <strong>Rol:</strong>
+          <ion-text>{{ user.role_name }}</ion-text>
+        </ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>
+          <strong>Créditos:</strong>
+          <ion-text>{{ user.credit_balance }}</ion-text>
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+
+    <!-- BOTONES -->
+    <div class="buttons-container ion-margin-top">
+      <!-- <ion-button class="btn-m" color="medium" (click)="goBack()">Volver</ion-button> -->
+
+      <ng-container *ngIf="!editMode; else editActions">
+        <ion-button class="btn-m" (click)="onEdit()">Editar</ion-button>
+        <ion-button class="btn-m" (click)="addCredits()">Añadir créditos</ion-button>
+      </ng-container>
+
+
+      <ng-template #editActions>
+        <ion-button class="btn-m"  [disabled]="form.invalid || saving" type="submit">
+          {{ saving ? 'Guardando…' : 'Guardar' }}
+        </ion-button>
+        <ion-button class="btn-m" color="danger" (click)="cancelEdit()" [disabled]="saving">Cancelar</ion-button>
+      </ng-template>
+    </div>
+    
+    <app-historic-credits-table *ngIf="userId" [userId]="user.id"></app-historic-credits-table>
+
+
+    <ng-template #noUser>
+      <ion-text color="medium">
+        <p>No se encontró información del usuario.</p>
+      </ion-text>
+    </ng-template>
+  </form>
+</ion-content>

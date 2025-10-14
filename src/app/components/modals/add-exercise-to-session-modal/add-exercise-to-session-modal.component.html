@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Añadir ejercicio</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Buscador (filtro front por título) -->
+  <ion-searchbar
+    [formControl]="search"
+    placeholder="Buscar por nombre..."
+    debounce="0">
+  </ion-searchbar>
+
+  <!-- Lista -->
+  <ion-list lines="full">
+    <ion-item *ngFor="let ex of filtered()">
+      <ion-thumbnail slot="start">
+        <img [src]="imgPlaceholder(ex.imgUrl)" alt="img" />
+      </ion-thumbnail>
+
+      <ion-label>
+        <div class="title">{{ ex.title }}</div>
+        <div class="subtitle" *ngIf="ex.type_name">{{ ex.type_name }}</div>
+      </ion-label>
+
+      <ion-button fill="clear" color="primary" slot="end" (click)="onAdd(ex)">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item *ngIf="!loading() && filtered().length === 0" lines="none">
+      <ion-label color="medium">Sin resultados</ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

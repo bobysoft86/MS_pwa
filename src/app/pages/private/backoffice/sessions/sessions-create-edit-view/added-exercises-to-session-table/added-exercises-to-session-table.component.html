@@ -1,0 +1,37 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>Ejercicios de la sesión</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <!-- Lista con drag & drop CDK -->
+    <div cdkDropList (cdkDropListDropped)="drop($event)" class="dd-list">
+      <ion-list lines="full">
+        <ion-item *ngFor="let ex of items; trackBy: trackById" cdkDrag class="dd-item">
+          <!-- Puedes usar el thumbnail como handle -->
+          <ion-thumbnail slot="start" >
+            <img [src]="placeholder(ex?.exercise?.imgUrl)" alt="thumbnail" />
+          </ion-thumbnail>
+
+          <ion-label >
+            <div class="title">{{ ex?.exercise?.title }}</div>
+            <div class="subtitle">Peso: {{ ex?.weight ?? '—' }} kg</div>
+            <div class="subtitle">Reps: {{ ex?.reps ?? '—' }}</div>
+          </ion-label>
+
+
+          <ion-icon (click)="onDeleteExerciseSession(ex)" name="trash-outline" slot="end"></ion-icon>
+
+          <ion-icon (click)="onEditExerciseSession(ex)" name="create-outline" slot="end"></ion-icon>
+
+          <!-- Ícono decorativo opcional -->
+          <ion-icon cdkDragHandle name="reorder-two-outline" slot="end"></ion-icon>
+        </ion-item>
+
+        <ion-item *ngIf="!items?.length" lines="none">
+          <ion-label color="medium">No hay ejercicios en esta sesión.</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-card-content>
+</ion-card>

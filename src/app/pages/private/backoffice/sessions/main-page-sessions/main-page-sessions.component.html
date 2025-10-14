@@ -1,0 +1,33 @@
+
+<div>
+<div class="header-container">
+
+    <div>
+        <h2>Gestión de sessiones</h2>
+    </div>
+    <ion-button class="btn-m" (click)="onCreateSession()">Crear nueva session</ion-button>
+</div>
+<app-sessions-table
+ [sessions]="sessions"
+ (view)="onViewSession($event)"
+ (delete)="onRemoveSession($event)"
+ ></app-sessions-table>
+
+</div>
+
+<div>
+    <div class="header-container">
+
+        <div>
+            <h2>Gestión de tipos de sessiones</h2>
+        </div>
+        <ion-button class="btn-m" (click)="onCreateSessionType()">Crear nuevo tipo de session</ion-button>
+    </div>
+
+    <app-sessions-types-table *ngIf="sessionsTypes"
+     [sessionsTypes]="sessionsTypes"
+     (view)="onViewSessionType($event)"
+     (delete)="onRemoveSessionType($event)"
+    ></app-sessions-types-table>
+   
+</div>

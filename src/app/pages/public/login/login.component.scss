@@ -1,0 +1,20 @@
+.login-container {
+ display: flex
+;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-around;
+    height: 100vh;
+    padding: 20px;
+}
+
+.logo-container {
+ display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+        width: 250px;
+        height: auto;
+        margin-bottom: 20px;
+    }
+}

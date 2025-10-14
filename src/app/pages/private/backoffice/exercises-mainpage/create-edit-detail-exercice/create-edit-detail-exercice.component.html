@@ -1,0 +1,69 @@
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="submit($event)">
+
+    <!-- TITLE -->
+    <ion-item [class.ion-invalid]="form.controls.title.invalid && (form.controls.title.dirty || form.controls.title.touched)">
+      <ion-label position="floating">Título</ion-label>
+      <ion-input mode="ios" type="text" formControlName="title" [readonly]="isView()" required></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="form.controls.title.hasError('required') && (form.controls.title.dirty || form.controls.title.touched)">
+      <small>El título es obligatorio.</small>
+    </ion-text>
+
+    <!-- TYPE SELECT -->
+    <ion-item class="ion-margin-top" [class.ion-invalid]="form.controls.type_id.invalid && (form.controls.type_id.dirty || form.controls.type_id.touched)">
+      <ion-label position="floating">Tipo de ejercicio</ion-label>
+      <ion-select formControlName="type_id" interface="popover" [disabled]="isView()" required>
+        <ion-select-option *ngFor="let t of types" [value]="t.id">{{ t.name }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-text color="danger" *ngIf="form.controls.type_id.hasError('required') && (form.controls.type_id.dirty || form.controls.type_id.touched)">
+      <small>Selecciona un tipo.</small>
+    </ion-text>
+
+    <!-- IMAGE -->
+    <ion-item class="ion-margin-top">
+      <ion-label>Imagen</ion-label>
+      <input type="file" name="image" accept="image/*" (change)="onImageSelected($event)" [disabled]="isView()" style="padding:12px 0;width:100%;" />
+    </ion-item>
+
+    <div class="ion-margin-top" *ngIf="imgPreview()">
+      <img [src]="imgPreview()!" alt="preview" style="max-width:100%; border-radius:8px;" />
+    </div>
+
+    <!-- VIDEO -->
+    <ion-item class="ion-margin-top">
+      <ion-label>Video</ion-label>
+      <input type="file" name="video" accept="video/*" (change)="onVideoSelected($event)" [disabled]="isView()" style="padding:12px 0;width:100%;" />
+    </ion-item>
+
+    <div class="ion-margin-top" *ngIf="videoName()">
+      <ion-text color="medium">Video: {{ videoName() }}</ion-text>
+    </div>
+
+    <!-- ACCIONES -->
+    <div class="ion-margin-top">
+      <ion-button class="btn-m"  expand="block" type="submit"
+                  [disabled]="form.invalid || isView() || loading()">
+        {{ mode === 'edit' ? (loading() ? 'Guardando…' : 'Guardar cambios')
+                           : (loading() ? 'Creando…'  : 'Crear ejercicio') }}
+      </ion-button>
+
+           <ion-button class="btn-red"  expand="block"  >
+        Eliminar
+      </ion-button>
+    </div>
+  </form>
+
+  <!-- Vista lectura -->
+  <div class="ion-margin-top" *ngIf="isView()">
+    <div *ngIf="exercise?.imgUrl">
+      <h4>Imagen</h4>
+      <img [src]="exercise!.imgUrl!" alt="imagen" style="max-width:100%; border-radius:8px;">
+    </div>
+    <div class="ion-margin-top" *ngIf="exercise?.videoUrl">
+      <h4>Video</h4>
+      <video [src]="exercise!.videoUrl!" controls style="width:100%; border-radius:8px;"></video>
+    </div>
+  </div>
+</ion-content>

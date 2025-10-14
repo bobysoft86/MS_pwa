@@ -1,0 +1,144 @@
+<ion-content  class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <!-- TITLE -->
+    <ion-item
+      [class.ion-invalid]="
+        form.controls.title.invalid &&
+        (form.controls.title.dirty || form.controls.title.touched)
+      "
+    >
+      <ion-label position="floating">Título</ion-label>
+      <ion-input
+        mode="ios"
+        type="text"
+        formControlName="title"
+        [readonly]="isView()"
+        required
+      >
+      </ion-input>
+    </ion-item>
+    <ion-text
+      color="danger"
+      *ngIf="
+        form.controls.title.hasError('required') &&
+        (form.controls.title.dirty || form.controls.title.touched)
+      "
+    >
+      <small>El título es obligatorio.</small>
+    </ion-text>
+    <ion-text
+      color="danger"
+      *ngIf="
+        form.controls.title.hasError('minlength') &&
+        (form.controls.title.dirty || form.controls.title.touched)
+      "
+    >
+      <small>Mínimo 3 caracteres.</small>
+    </ion-text>
+
+    <!-- TYPE SELECT -->
+    <ion-item
+      class="ion-margin-top"
+      [class.ion-invalid]="
+        form.controls.type_id.invalid &&
+        (form.controls.type_id.dirty || form.controls.type_id.touched)
+      "
+    >
+      <ion-label position="floating">Tipo de sesión</ion-label>
+      <ion-select
+        formControlName="type_id"
+        interface="popover"
+        [disabled]="isView()"
+        required
+      >
+        <ion-select-option *ngFor="let t of types" [value]="t.id">{{
+          t.name
+        }}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-text
+      color="danger"
+      *ngIf="
+        form.controls.type_id.hasError('required') &&
+        (form.controls.type_id.dirty || form.controls.type_id.touched)
+      "
+    >
+      <small>Selecciona un tipo.</small>
+    </ion-text>
+
+    <!-- NOTES -->
+    <ion-item class="ion-margin-top">
+      <ion-label position="stacked">Notas</ion-label>
+      <ion-textarea
+        mode="ios"
+        autoGrow="true"
+        formControlName="notes"
+        [readonly]="isView()"
+        placeholder="Notas o información adicional"
+      >
+      </ion-textarea>
+    </ion-item>
+
+        <!-- RESTTIME -->
+    <ion-item class="ion-margin-top">
+      <ion-label position="stacked">Tiempo de descanso</ion-label>
+      <ion-textarea
+        mode="ios"
+        autoGrow="true"
+        formControlName="restTime"
+        [readonly]="isView()"
+        placeholder="tiempo de descanso entre ejercicios"
+      >
+      </ion-textarea>
+    </ion-item>
+
+    <app-added-exercises-to-session-table
+      *ngIf="sessionExercises"
+      [items]="sessionExercises"
+     (edit)="onEditExerciseSession($event)"
+     (delete)="onDeleteExerciseSession($event)"
+
+
+      (orderChange)="onSaveNewOrder($event)"
+      
+    ></app-added-exercises-to-session-table>
+
+    <!-- ACCIONES -->
+    <div class="ion-margin-top">
+      <ion-button
+        class="btn-m"
+        expand="block"
+        type="submit"
+        [disabled]="form.invalid || isView() || loading()"
+      >
+        {{
+          mode() === "edit"
+            ? loading()
+              ? "Guardando…"
+              : "Guardar cambios"
+            : loading()
+            ? "Creando…"
+            : "Crear sesión"
+        }}
+      </ion-button>
+
+      <ion-button
+        class="btn-m"
+        expand="block"
+        type="button"
+        (click)="addExerciseToSession()"
+      >
+        Añadir ejercicio
+      </ion-button>
+      <ion-button
+        class="btn-m"
+        color="medium"
+        expand="block"
+        type="button"
+      (click)="goToMainSessions()"
+      >
+        Volver
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

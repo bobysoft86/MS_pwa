@@ -1,0 +1,31 @@
+
+<div>
+<div class="header-container">
+
+    <div>
+        <h2>Gestión de ejercicios</h2>
+    </div>
+    <ion-button class="btn-m" (click)="onCreateExercise()">Crear nuevo de ejercicio</ion-button>
+</div>
+
+    <app-exercises-list-table
+     [exercises]="exercises"
+  (view)="onViewExercise($event)"
+  (remove)="onRemoveExercise($event)"
+   ></app-exercises-list-table>
+</div>
+
+<div>
+    <div class="header-container">
+
+        <div>
+            <h2>Gestión de tipos de ejercicios</h2>
+        </div>
+        <ion-button class="btn-m" (click)="onCreateType()">Crear nuevo tipo de ejercicio</ion-button>
+    </div>
+    <app-exercises-types-list-table 
+    [items]="exercisesTypes" 
+    (view)="onViewType($event)"
+    (remove)="onRemoveType($event)"
+    ></app-exercises-types-list-table>
+</div>

@@ -1,0 +1,16 @@
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logo-container img {
+  max-width: 250px;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 100%;
+}/*# sourceMappingURL=home.component.css.map */

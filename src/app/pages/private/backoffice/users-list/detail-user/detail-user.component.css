@@ -1,0 +1,7 @@
+ion-item {
+  --inner-padding-end: 0;
+  font-size: 0.95rem;
+}
+ion-item ion-text {
+  margin-left: 4px;
+}/*# sourceMappingURL=detail-user.component.css.map */

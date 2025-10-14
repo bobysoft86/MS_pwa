@@ -1,0 +1,95 @@
+<ion-content fullscreen>
+  <div class="header-container ion-padding-horizontal ion-padding-top">
+    <h2>Crear nuevo usuario</h2>
+    <p class="subtitle">Introduce los datos y guarda para crear la cuenta.</p>
+  </div>
+
+  <form class="ion-padding" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+
+    <!-- Name -->
+    <ion-item class="ion-margin-bottom" [class.ion-invalid]="nameCtrl?.invalid && (nameCtrl?.dirty || nameCtrl?.touched)">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input
+        mode="ios"
+        type="text"
+        formControlName="name"
+        autocomplete="name"
+        inputmode="text"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="nameCtrl?.hasError('required') && (nameCtrl?.dirty || nameCtrl?.touched)">
+      <small>El nombre es obligatorio.</small>
+    </ion-text>
+    <ion-text color="danger" *ngIf="nameCtrl?.hasError('minlength') && (nameCtrl?.dirty || nameCtrl?.touched)">
+      <small>Debe tener al menos 2 caracteres.</small>
+    </ion-text>
+
+
+    <!-- Email -->
+    <ion-item class="ion-margin-bottom" [class.ion-invalid]="emailCtrl?.invalid && (emailCtrl?.dirty || emailCtrl?.touched)">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input
+        mode="ios"
+        type="email"
+        formControlName="email"
+        autocomplete="email"
+        inputmode="email"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="emailCtrl?.hasError('required') && (emailCtrl?.dirty || emailCtrl?.touched)">
+      <small>El email es obligatorio.</small>
+    </ion-text>
+    <ion-text color="danger" *ngIf="emailCtrl?.hasError('email') && (emailCtrl?.dirty || emailCtrl?.touched)">
+      <small>Formato de email no válido.</small>
+    </ion-text>
+
+
+    <!-- Password -->
+    <ion-item class="ion-margin-top ion-margin-bottom" [class.ion-invalid]="passwordCtrl?.invalid && (passwordCtrl?.dirty || passwordCtrl?.touched)">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input
+        mode="ios"
+        type="password"
+        formControlName="password"
+        autocomplete="new-password"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="passwordCtrl?.hasError('required') && (passwordCtrl?.dirty || passwordCtrl?.touched)">
+      <small>La contraseña es obligatoria.</small>
+    </ion-text>
+    <ion-text color="danger" *ngIf="passwordCtrl?.hasError('minlength') && (passwordCtrl?.dirty || passwordCtrl?.touched)">
+      <small>Debe tener al menos 4 caracteres.</small>
+    </ion-text>
+
+    <!-- Confirm Password -->
+    <ion-item class="ion-margin-top ion-margin-bottom" [class.ion-invalid]="(confirmPasswordCtrl?.invalid && (confirmPasswordCtrl?.dirty || confirmPasswordCtrl?.touched)) || passwordsMismatch">
+      <ion-label position="floating">Confirmar contraseña</ion-label>
+      <ion-input
+        mode="ios"
+        type="password"
+        formControlName="confirmPassword"
+        autocomplete="new-password"
+        required
+      ></ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="confirmPasswordCtrl?.hasError('required') && (confirmPasswordCtrl?.dirty || confirmPasswordCtrl?.touched)">
+      <small>Confirma la contraseña.</small>
+    </ion-text>
+    <ion-text color="danger" *ngIf="passwordsMismatch && (confirmPasswordCtrl?.dirty || confirmPasswordCtrl?.touched)">
+      <small>Las contraseñas no coinciden.</small>
+    </ion-text>
+
+    <!-- Submit -->
+    <ion-button
+      class="btn-m ion-margin-top"
+      expand="block"
+      type="submit"
+      [disabled]="form.invalid || loading">
+      {{ loading ? 'Guardando…' : 'Guardar usuario' }}
+    </ion-button>
+  </form>
+</ion-content>

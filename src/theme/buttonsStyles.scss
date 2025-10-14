@@ -1,0 +1,36 @@
+ion-button {
+  &::part(native) {
+    border-radius: 10px !important;
+  }
+}
+
+/* Botón negro principal */
+.btn-m {
+  --background: #000;
+  --color: #fff;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --border-radius: 10px;
+}
+
+/* Botón contorno (outline) */
+.btn-outline {
+  --background: #fff;
+  --color: #000;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --border-radius: 10px;
+  --border-color: #000;
+  --border-style: solid;
+  --border-width: 1px;
+  box-shadow: none;
+}
+
+/* Botón rojo */
+.btn-red {
+  --background: #ff3b30;
+  --color: #fff;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --border-radius: 10px;
+}

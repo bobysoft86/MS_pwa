@@ -1,0 +1,54 @@
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+
+    <!-- NAME -->
+    <ion-item [class.ion-invalid]="form.controls.name.invalid && (form.controls.name.dirty || form.controls.name.touched)">
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input
+        mode="ios"
+        type="text"
+        formControlName="name"
+        [readonly]="isView()"
+        required>
+      </ion-input>
+    </ion-item>
+    <ion-text color="danger" *ngIf="form.controls.name.hasError('required') && (form.controls.name.dirty || form.controls.name.touched)">
+      <small>El nombre es obligatorio.</small>
+    </ion-text>
+    <ion-text color="danger" *ngIf="form.controls.name.hasError('minlength') && (form.controls.name.dirty || form.controls.name.touched)">
+      <small>Mínimo 3 caracteres.</small>
+    </ion-text>
+
+    <!-- DESCRIPTION -->
+    <ion-item class="ion-margin-top" [class.ion-invalid]="form.controls.description.invalid && (form.controls.description.dirty || form.controls.description.touched)">
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-textarea
+        mode="ios"
+        formControlName="description"
+        [readonly]="isView()"
+        autoGrow="true"
+        rows="3"
+        required>
+      </ion-textarea>
+    </ion-item>
+    <ion-text color="danger" *ngIf="form.controls.description.hasError('required') && (form.controls.description.dirty || form.controls.description.touched)">
+      <small>La descripción es obligatoria.</small>
+    </ion-text>
+    <ion-text color="danger" *ngIf="form.controls.description.hasError('minlength') && (form.controls.description.dirty || form.controls.description.touched)">
+      <small>Mínimo 3 caracteres.</small>
+    </ion-text>
+
+    <!-- ACCIONES -->
+    <div class="ion-margin-top">
+      <ion-button class="btn-m" color="primary" expand="block" type="submit"
+                  [disabled]="form.invalid || isView() || loading()">
+        {{ mode() === 'edit' ? (loading() ? 'Guardando…' : 'Guardar cambios')
+                             : (loading() ? 'Creando…'  : 'Crear tipo') }}
+      </ion-button>
+
+      <ion-button class="btn-m" color="medium" expand="block" type="button" routerLink="/private/backoffice/exercise-types">
+        Cancelar
+      </ion-button>
+    </div>
+  </form>
+</ion-content>
