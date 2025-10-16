@@ -26,6 +26,6 @@ goToBackoffice(){
 this.navCtrl.navigateForward('/private/backoffice');
 }
 whatsContact(){
-location.href ="https://wa.me/34628002164";
+location.href ="https://wa.me/34628002164"
 }
 }
