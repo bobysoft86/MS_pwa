@@ -5,8 +5,8 @@ export const environment = {
    * URL base de tu API local
    * Ajusta el puerto si tu backend escucha en otro (por defecto: 3000)
    */
-  apiUrl: 'http://localhost:3000',
-  assetsUrl: 'http://localhost:3000/uploads',
+  apiUrl: 'http://103.45.245.67:3000',
+  assetsUrl: 'http://103.45.245.67:3000/uploads',
 
 
   appName: 'MS Backoffice',

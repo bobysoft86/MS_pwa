@@ -7,6 +7,8 @@ import { authInterceptor } from './app/core/interceptors/auth.interceptor';  // 
 
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
+import { isDevMode } from '@angular/core';
+import { provideServiceWorker } from '@angular/service-worker';
 
 bootstrapApplication(AppComponent, {
   providers: [
@@ -15,6 +17,9 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes, withPreloading(PreloadAllModules)),
     provideHttpClient(
       withInterceptors([authInterceptor]) // quita esta línea si no usas interceptor aún
-    ),
+    ), provideServiceWorker('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            registrationStrategy: 'registerWhenStable:30000'
+          }),
   ],
 });
